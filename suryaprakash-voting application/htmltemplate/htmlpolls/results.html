@@ -1,0 +1,43 @@
+
+{% include "navbar/nav.html" %}
+{% block content %}
+<style>
+    span{
+        float: right;
+    }
+    #set{
+  margin-top: 10%;
+  margin-left: 30%;
+}
+.color{
+  height: 78vh;
+}
+@media screen and (max-width:650px) {
+#set{
+  margin-top: 20%;
+  margin-left: 0%;
+  padding-left: 30%;
+}
+}
+</style>
+<section class="color bg-image" style="background-color:rgba(173, 219, 229,0.5);">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+<h1 class="mb-5 text-center">{{ question.question_text }}</h1>
+
+<ul class="list-group mb-5">
+    {% for choice in question.choice_set.all %}
+    <li class="list-group-item">
+        {{ choice.choice_text }}
+    <span class="btn btn-success">{{ choice.votes }}vote{{ choice.votes | pluralize }}</span>
+    </li>
+    {% endfor %}
+</ul>
+
+<a class="btn btn-secondary" href="{% url 'polls:index' %}">Back To Polls</a>
+<a class="btn btn-dark" href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+</div>
+{% include 'navbar/fotter.html' %}
+</section>
+{% endblock %}
